@@ -1,0 +1,25 @@
+<?php
+
+use Drupal\user;
+use SecurityLib\Strength;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for user entities.
+ */
+function token_auth_user_insert(Drupal\Core\Entity\EntityInterface $entity){
+  $type = $entity->bundle();
+  switch($type){
+    case 'user':
+      $token = _token_auth_get_token(32);
+      $entity->set('field_auth_token', $token);
+      $entity->save();
+    break;
+  }
+}
+
+/**
+ * Helper function
+ */
+function _token_auth_get_token($length) {
+  return join('', array_map(function($value) { return $value == 1 ? mt_rand(1, 9) : mt_rand(0, 9); }, range(1, $length)));
+}

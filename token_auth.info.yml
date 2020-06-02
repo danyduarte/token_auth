@@ -1,0 +1,6 @@
+name: 'Token Auth'
+type: module
+description: 'Provides Auth middleware.'
+package: dept
+# version: VERSION
+core: 8.x

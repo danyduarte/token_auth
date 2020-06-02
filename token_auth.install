@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function token_auth_install() {
+
+  $query = \Drupal::entityQuery('user');
+  $uids = $query->execute();
+  foreach ($uids as $key => $uid) {
+    $token = _token_auth_get_token(32);
+    $user = \Drupal\user\Entity\User::load($uid);
+    $user->set('field_auth_token', $token_auth);
+    $user->save();
+  }
+}

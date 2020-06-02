@@ -1,0 +1,5 @@
+services:
+  token_auth.custom_middleware:
+    class: Drupal\token_auth\TokenAuthMiddleware
+    tags:
+      - { name: http_middleware, priority: 150 }
